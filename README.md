@@ -96,7 +96,7 @@ This will also REPLACE the below Jetstream Inertia files if `--jetstream-inertia
 
 ## Issues
 
-Feel free to raise any [Issue](/issues) here.
+Feel free to raise any [Issue](https://github.com/pioneer-dynamics/laravel-passkey/issues) here.
 
 ## Contributing
 
