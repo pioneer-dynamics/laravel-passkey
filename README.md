@@ -12,13 +12,10 @@ Easy Passkey integration for Laravel
 
 > !!WARNING!! Any existing files will be replaced.
 
-This will also REPLACE the below Jetstream Inertia files if `--jetstream-inertia` is provided.
-1. `js/Components/ConfirmsPassword.vue`
-2. `js/Pages/Auth/Login.vue`
 
 ## Installation
 
-> You have two ways to run setup - 1, the Setup command in step #2 (below) or 2, the `vendor:publish` command. I recommend the `passkey:install` command since it takes care of replacing some placeholders in the published files apart from publishing them. Use the `--table` and `--username` flags to change the defaults. These values default to `users` and `email` respectively. If using the `vendor:publish` command you'll need to replace `__USERNAME__`, `__TABLE__`, `__USERNAME_LABEL__` and the `__USERNAME_TYPE__` placeholders manually. These placeholders can be found in the `js/Components/ConfirmsPassword.vue`, `js/Components/ConfirmsPassword.vue`, `js/Pages/Auth/Login.vue` and the `config/passkey.php` files.
+> You have two ways to run setup - 1, the Setup command in step #2 (below) or 2, the `vendor:publish` command. I recommend the `passkey:install` command since it takes care of replacing some placeholders in the published files apart from publishing them. Use the `--table` and `--username` flags to change the defaults. These values default to `users` and `email` respectively. If using the `vendor:publish` command you'll need to replace `__USERNAME__`, `__TABLE__`, `__USERNAME_LABEL__` and the `__USERNAME_TYPE__` placeholders manually. These placeholders can be found in the `js/Components/ConfirmsPasswordOrPasskey.vue`, `js/Components/ConfirmsPasskey.vue`, `js/Pages/Auth/LoginWithPasskey.vue` and the `config/passkey.php` files.
 
 1. Require the library
 
