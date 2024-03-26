@@ -13,15 +13,15 @@ use PioneerDynamics\LaravelPasskey\Contracts\PasskeyAuthenticator;
 
 class PasskeyServiceProvider extends ServiceProvider
 {
-    const CONFIG_FILE = __DIR__ . '/../config/passkey.php';
+    const CONFIG_FILE = __DIR__ . '/../../config/passkey.php';
 
-    const MIGRATIONS_PATH = __DIR__ . '/../database/migrations/';
+    const MIGRATIONS_PATH = __DIR__ . '/../../database/migrations/';
     
-    const VUE_COMPONENTS_PATH = __DIR__ . '/../resources/js/Components/';
+    const VUE_COMPONENTS_PATH = __DIR__ . '/../../resources/js/Components/';
 
-    CONST VUE_PROFILES_PARTIALS_PATH = __DIR__ . '/../resources/js/Pages/Profile/Partials';
+    CONST VUE_PROFILES_PARTIALS_PATH = __DIR__ . '/../../resources/js/Pages/Profile/Partials';
 
-    CONST VUE_LOGIN_PATH = __DIR__ . '/../resources/js/Pages/Auth';
+    CONST VUE_LOGIN_PATH = __DIR__ . '/../../resources/js/Pages/Auth';
 
     /**
      * Register services.
