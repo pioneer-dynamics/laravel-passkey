@@ -43,13 +43,13 @@ class PasskeyInstall extends Command
 
         if($this->confirm('This command should ONLY be run in development and ONLY ONCE. Do you want to continue?'))
         {
-            $this->task('Publishing migration file', fn() => $this->publishMigrations());
+            $this->publishMigrations();
 
             if($this->option('config'))
-                $this->task('Publishing config file', fn() => $this->publishConfigFile());
+                $this->publishConfigFile();
 
             if($this->option('jetstream-inertia'))
-                $this->task('Publishing Jetstream-Inertia vue files', fn() => $this->publishVueComponents());
+                $this->publishVueComponents();
         }
     }
 
@@ -61,24 +61,6 @@ class PasskeyInstall extends Command
         $this->comment('3. Jetstream flavoured Inertia JS component files, if `--jetstream-inertia` is provided.');
         $this->newLine();
         $this->alert('If these files already exist, they will be replaced');
-    }
-
-    private function task($message, callable $closure)
-    {
-        $this->output->write($message);
-        
-        try
-        {
-            $closure();
-        }
-        catch(\Exception $e)
-        {
-            $this->output->write('✘');
-        }
-
-        $this->output->write('✔');
-
-        $this->newLine();
     }
 
     private function publishVueComponents()
