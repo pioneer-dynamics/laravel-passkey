@@ -1,0 +1,113 @@
+# Laravel Passkeys
+
+Easy Passkey integration for Laravel
+
+## ALERT
+
+> !!!WARNING!!! The command `passkey:install` command must be run ONLY on development and ONLY ONCE. Depending on the options provided, this command will publish the below files and modify them to suit your needs. Please find the details below.
+
+1. Config file, if `--config` parameter is provided
+2. Migration file
+3. Jetstream flavoured Inertia JS component files, if `--jetstream-inertia` is provided.
+
+> !!WARNING!! Any existing files will be replaced.
+
+This will also REPLACE the below Jetstream Inertia files if `--jetstream-inertia` is provided.
+1. `js/Components/ConfirmsPassword.vue`
+2. `js/Pages/Auth/Login.vue`
+
+## Installation
+
+> You have two ways to run setup - 1, the Setup command in step #2 (below) or 2, the `vendor:publish` command. I recommend the `passkey:install` command since it takes care of replacing some placeholders in the published files apart from publishing them. Use the `--table` and `--username` flags to change the defaults. These values default to `users` and `email` respectively. If using the `vendor:publish` command you'll need to replace `__USERNAME__`, `__TABLE__`, `__USERNAME_LABEL__` and the `__USERNAME_TYPE__` placeholders manually. These placeholders can be found in the `js/Components/ConfirmsPassword.vue`, `js/Components/ConfirmsPassword.vue`, `js/Pages/Auth/Login.vue` and the `config/passkey.php` files.
+
+1. Require the library
+
+    `composer install pioneer-dynamics/laravel-passkey`
+
+2. Run the setup
+
+    > Before running this command, run `php artisan passkey:install --help` to see understand all options.
+
+    `php artisan passkey:install`
+
+    > This will publish the config files, migrations and some Jetstream-Inertia flavoured vue files. It will also replace some contents of these published files.
+
+3. Run the migrations
+
+    `php artisan migrate`
+
+4. Implement the `PasskeyUser` interface to you user model and add the `HasPasskeys` trait
+
+    ```php
+    <?php
+
+    namespace App\Models;
+
+    use PioneerDynamics\LaravelPasskey\Traits\HassPasskeys;
+    use PioneerDynamics\LaravelPasskey\Contracts\PasskeyUser;
+    // ...
+    use Illuminate\Foundation\Auth\User as Authenticatable;
+    // ...
+
+    class User extends Authenticatable implements PasskeyUser
+    {
+        // ...
+        use HasPasskeys;
+
+        // ...
+
+        /**
+         * In addition to some helper methods, the below are methods defined
+         * in the `HasPasskeys` trait. Override them here if needed. 
+         * 
+         * Below are the default definitions in `HasPasskeys`
+         */
+
+        // public function getUsername()
+        // {
+        //      // The username of the user (Shown by the browser passkey interface)
+        //      return $this->email;
+        // }
+        // 
+        // public function getUserId()
+        // {
+        //      // The ID of the user
+        //      return $this->id;
+        // }
+        // 
+        // public function getDisplayName()
+        // {
+        //      // The display name of the user
+        //      return $this->name;
+        // }
+        // 
+        // public function getUserIcon()
+        // {
+        //      // The display picture of the user.
+        //      // This MUST be a data URI.
+        //      // E.g.
+        //      // return 'data:image/svg+xml;utf8,...'
+        //     return null;
+        // }
+
+        // ...
+    }
+    ```
+
+## Issues
+
+Feel free to raise any [Issue](/issues) here.
+
+## Contributing
+
+Feel free to raise pull requests.
+
+## Licence
+
+The MIT License (MIT) Copyright © Mathew Paret
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

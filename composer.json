@@ -1,0 +1,28 @@
+{
+    "name": "pioneer-dynamics/laravel-passkey",
+    "description": "Easy Passkey integration for Laravel",
+    "type": "library",
+    "require": {
+        "svgta/webauthn": "^1.0",
+        "laravel/framework": "^10.10"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "PioneerDynamics\\LaravelPasskey\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mathew Paret",
+            "email": "mathewparet@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "PioneerDynamics\\LaravelPasskey\\Providers\\PasskeyServiceProvider"
+            ]
+        }
+    }
+}
