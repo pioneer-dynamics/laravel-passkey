@@ -61,10 +61,6 @@ class PasskeyInstall extends Command
         $this->comment('3. Jetstream flavoured Inertia JS component files, if `--jetstream-inertia` is provided.');
         $this->newLine();
         $this->alert('If these files already exist, they will be replaced');
-        $this->newLine();
-        $this->alert('This will also replace the below Jetstream Inertia files if `--jetstream-inertia` is provided.');
-        $this->comment('1. `'.resource_path('js/Components/ConfirmsPassword.vue').'`');
-        $this->comment('2. `'.resource_path('js/Pages/Auth/Login.vue').'`');
     }
 
     private function task($message, callable $closure)
@@ -95,8 +91,8 @@ class PasskeyInstall extends Command
 
         $this->replacePlaceholders(
             resource_path('js/Components/ConfirmsPasskey.vue'),
-            resource_path('js/Components/ConfirmsPassword.vue'),
-            resource_path('js/Pages/Auth/Login.vue')
+            resource_path('js/Components/ConfirmsPasswordOrPasskey.vue'),
+            resource_path('js/Pages/Auth/LoginWithPasskey.vue')
         );
     }
 
