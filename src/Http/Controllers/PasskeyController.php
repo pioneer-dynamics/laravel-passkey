@@ -32,6 +32,7 @@ class PasskeyController extends Controller
      */
     public function getRegistrationOptions(PasskeyRegistrar $passkeyRegistrar, Request $request)
     {
+        dd($request, request()->user());
         return back()->with('flash', [
             'options' => $passkeyRegistrar->setUser($request->user())->generateOptions()
         ]);
