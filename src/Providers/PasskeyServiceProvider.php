@@ -2,16 +2,16 @@
 
 namespace PioneerDynamics\LaravelPasskey\Providers;
 
-use App\Tools\Passkey\SvgtasRegistrar;
-use Illuminate\Support\ServiceProvider;
-use App\Tools\Passkey\SvgtasAuthenticator;
-use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Console\AboutCommand;
+use PioneerDynamics\LaravelPasskey\Passkey\Passkey;
+use PioneerDynamics\LaravelPasskey\Passkey\SvgtasRegistrar;
+use PioneerDynamics\LaravelPasskey\Contracts\PasskeyRegistrar;
+use PioneerDynamics\LaravelPasskey\Passkey\SvgtasAuthenticator;
+use PioneerDynamics\LaravelPasskey\Contracts\PasskeyAuthenticator;
 use PioneerDynamics\LaravelPasskey\Console\Commands\PasskeyInstall;
 use PioneerDynamics\LaravelPasskey\Contracts\Passkey as ContractsPasskey;
-use PioneerDynamics\LaravelPasskey\Passkey\Passkey;
-use PioneerDynamics\LaravelPasskey\Contracts\PasskeyRegistrar;
-use PioneerDynamics\LaravelPasskey\Contracts\PasskeyAuthenticator;
 
 class PasskeyServiceProvider extends ServiceProvider
 {

@@ -1,5 +1,5 @@
 <?php
-namespace App\Tools\Passkey;
+namespace PioneerDynamics\LaravelPasskey\Passkey;
 
 use PioneerDynamics\LaravelPasskey\Contracts\PasskeyUser;
 use PioneerDynamics\LaravelPasskey\Passkey\SvgtasPasskey;
