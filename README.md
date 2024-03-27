@@ -62,7 +62,7 @@ The core of the project uses [svgta/webauthn](https://github.com/svgta1/webauthn
         // ...
 
         /**
-         * In addition to some helper methods, the below are methods defined
+         * In addition to some helper methods, the below methods are defined
          * in the `HasPasskeys` trait. Override them here if needed. 
          * 
          * Below are the default definitions in `HasPasskeys`
@@ -111,6 +111,7 @@ The core of the project uses [svgta/webauthn](https://github.com/svgta1/webauthn
     use Inertia\Inertia;
     use Illuminate\Support\Facades\Route;
     use Illuminate\Support\ServiceProvider;
+    use Laravel\Fortify\Fortify;
 
     // ...
 
