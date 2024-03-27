@@ -10,7 +10,7 @@ trait HasPasskeys
         return $this->morphMany(Passkey::class, "passkeyable");
     }
 
-    public function bootHasPassKeys()
+    public static function bootHasPassKeys()
     {
         static::deleting(function ($user) {
             $user->passkeys()->delete();
