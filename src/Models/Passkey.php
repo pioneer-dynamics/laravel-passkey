@@ -33,6 +33,6 @@ class Passkey extends Model
 
     public function scopeUser($query, $value)
     {
-        return $query->where('passkeyable_id', $value)->where('passkeyable_type', Config::get('passkey.user_model'));
+        return $query->where('passkeyable_id', $value)->where('passkeyable_type', Config::get('passkey.models.user'));
     }
 }

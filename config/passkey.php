@@ -32,10 +32,19 @@ return [
      */
     'session_key' => env('PASSKEY_SESSION_KEY', ''),
 
-    /**
-     * The user account mode to which passkeys are attached
-     */
-    'user_model' => 'App\Models\User',
+
+    'models' => [
+        /**
+         * The user model to which passkeys are attached
+         */
+        'user' => 'App\Models\User',
+
+        /**
+         * If you wish to extend or use a different model for passkeys, 
+         * update the model to be used here.
+         */
+        'passkey' => PioneerDynamics\LaravelPasskey\Models\Passkey::class
+    ],
 
     /**
      * -----------------------------------------------------

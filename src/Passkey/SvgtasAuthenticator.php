@@ -1,7 +1,7 @@
 <?php
 namespace PioneerDynamics\LaravelPasskey\Passkey;
 
-use PioneerDynamics\LaravelPasskey\Models\Passkey;
+use Illuminate\Support\Facades\Config;
 use PioneerDynamics\LaravelPasskey\Contracts\PasskeyUser;
 use PioneerDynamics\LaravelPasskey\Passkey\SvgtasPasskey;
 use PioneerDynamics\LaravelPasskey\Contracts\PasskeyAuthenticator;
@@ -48,7 +48,7 @@ class SvgtasAuthenticator extends SvgtasPasskey implements PasskeyAuthenticator
         if($this->passkeyUser)
             $passkey = $this->passkeyUser->passkeys()->credential($response['credentialId'])->firstOrFail();
         else
-            $passkey = Passkey::credential($response['credentialId'])->user($response['userHandle'])->firstOrFail();
+            $passkey = Config::get('passkey.models.passkey')::credential($response['credentialId'])->user($response['userHandle'])->firstOrFail();
 
         return $this->webauthn->authenticate()->validate($passkey->public_key);
     }
