@@ -88,7 +88,7 @@ class PasskeyInstall extends Command
                 'luxon' => '^3.4.4',
                 '@simplewebauthn/browser' => '^9.0.1',
             ] + $packages;
-        });
+        }, false);
 
         if (file_exists(base_path('pnpm-lock.yaml'))) {
             $this->runCommands(['pnpm install', 'pnpm run build']);
