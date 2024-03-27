@@ -2,6 +2,10 @@
 
 Easy Passkey integration for Laravel
 
+## Thank You
+
+The core of the project uses [svgta/webauthn](https://github.com/svgta1/webauthn-php) library.
+
 ## ALERT
 
 > !!!WARNING!!! The command `passkey:install` command must be run ONLY on development and ONLY ONCE. Depending on the options provided, this command will publish the below files and modify them to suit your needs. Please find the details below.
