@@ -140,6 +140,13 @@ The core of the project uses [svgta/webauthn](https://github.com/svgta1/webauthn
 
 6. Replace the `<ConfirmsPassword/>` component with `<ConfirmsPasswordOrPasskey/>` component whereever `<ConfirmsPassword/>` is used.
 
+7. If using Jetstream-InertiaJS you need to additionally install the below npm packages:
+
+    ```
+    npm i luxon
+    npm i @simplewebauthn/browser
+    ```
+
 ## Issues
 
 Feel free to raise any [Issue](https://github.com/pioneer-dynamics/laravel-passkey/issues) here.
