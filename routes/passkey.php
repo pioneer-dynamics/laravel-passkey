@@ -9,11 +9,12 @@ Route::prefix(Config::get('passkey.routes.prefix', 'passkeys'))->group(function 
     Route::post('/login', [PasskeyController::class, 'login'])->name('passkeys.login');
 });
 
-// Route::middleware([
-//     'auth:sanctum',
-//     config('jetstream.auth_session'),
-//     'verified',
-// ])->group(function () {
+Route::middleware([
+    'web',
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
 
     Route::prefix(Config::get('passkey.routes.prefix', 'passkeys'))->group(function () {
         Route::middleware('password.confirm:,'.Config::get('passkey.password_confirmation_ttl'))->post('/registration-options', [PasskeyController::class, 'getRegistrationOptions'])->name('passkeys.registration-options');
@@ -22,4 +23,4 @@ Route::prefix(Config::get('passkey.routes.prefix', 'passkeys'))->group(function 
         Route::post('/', [PasskeyController::class, 'store'])->name('passkeys.store');
     });
 
-// });
+});
