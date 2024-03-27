@@ -5,6 +5,8 @@ namespace PioneerDynamics\LaravelPasskey\Providers;
 use App\Tools\Passkey\SvgtasRegistrar;
 use Illuminate\Support\ServiceProvider;
 use App\Tools\Passkey\SvgtasAuthenticator;
+use Illuminate\Foundation\Console\AboutCommand;
+use Illuminate\Support\Facades\Config;
 use PioneerDynamics\LaravelPasskey\Console\Commands\PasskeyInstall;
 use PioneerDynamics\LaravelPasskey\Contracts\Passkey as ContractsPasskey;
 use PioneerDynamics\LaravelPasskey\Passkey\Passkey;
@@ -13,6 +15,8 @@ use PioneerDynamics\LaravelPasskey\Contracts\PasskeyAuthenticator;
 
 class PasskeyServiceProvider extends ServiceProvider
 {
+    const VERSION = '1.0.0';
+
     const CONFIG_FILE = __DIR__ . '/../../config/passkey.php';
 
     const MIGRATIONS_PATH = __DIR__ . '/../../database/migrations/';
@@ -54,6 +58,23 @@ class PasskeyServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->definePublishableAssets();
+
+        $this->defineRoutes();
+
+        $this->defineAbout();
+    }
+
+    public function defineAbout()
+    {
+        AboutCommand::add('PioneerDynamics/LaravelPasskey', fn() => [
+            'Version' => self::VERSION,
+        ]);
+    }
+
+    private function defineRoutes()
+    {
+        if(Config::get('passkey.routes.enabled', true))
+            $this->loadRoutesFrom(__DIR__ . '/../../routes/passkey.php');
     }
 
     private function definePublishableAssets()

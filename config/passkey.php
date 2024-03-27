@@ -66,5 +66,17 @@ return [
          * -----------------------------------------------------
          */
         'table' => '__TABLE__',
+    ],
+
+    'routes' => [
+        /**
+         * Use package defined routes?
+         */
+        'enabled' => true,
+
+        /**
+         * What should be the prefix for the package defined routes
+         */
+        'prefix' => '/passkeys',
     ]
 ];
