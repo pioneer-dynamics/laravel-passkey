@@ -2,6 +2,10 @@
 
 Easy Passkey integration for Laravel
 
+> Click the thumbnail below to see a video of the package in action.:
+
+[![](https://play.vidyard.com/5xRa3CyPEaYkRTiBCiNzuE.jpg)](https://share.vidyard.com/watch/5xRa3CyPEaYkRTiBCiNzuE?)
+
 ## Thank You
 
 The core of the project uses [svgta/webauthn](https://github.com/svgta1/webauthn-php) library.
