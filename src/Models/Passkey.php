@@ -8,10 +8,6 @@ use Illuminate\Support\Facades\Config;
 
 class Passkey extends Model
 {
-    protected $casts = [
-        'public_key' => 'encrypted:json',
-    ];
-
     protected $fillable = [
         'public_key',
         'credential_id',
