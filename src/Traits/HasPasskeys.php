@@ -1,13 +1,13 @@
 <?php
 namespace PioneerDynamics\LaravelPasskey\Traits;
 
-use PioneerDynamics\LaravelPasskey\Models\Passkey;
+use Illuminate\Support\Facades\Config;
 
 trait HasPasskeys
 {
     public function passkeys()
     {
-        return $this->morphMany(Passkey::class, "passkeyable");
+        return $this->morphMany(Config::get('passkey.models.passkey'), "passkeyable");
     }
 
     public static function bootHasPassKeys()

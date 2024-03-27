@@ -4,7 +4,6 @@ namespace PioneerDynamics\LaravelPasskey\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
-use PioneerDynamics\LaravelPasskey\Models\Passkey;
 use PioneerDynamics\LaravelPasskey\Contracts\PasskeyRegistrar;
 use PioneerDynamics\LaravelPasskey\Http\Controllers\Controller;
 use PioneerDynamics\LaravelPasskey\Contracts\PasskeyAuthenticator;
@@ -71,7 +70,7 @@ class PasskeyController extends Controller
 
         $username = optional($request->user())->$usernameField ?? $request->$usernameField;
 
-        $user = Config::get('passkey.user_model')::where($usernameField, $username)->first();
+        $user = Config::get('passkey.models.user')::where($usernameField, $username)->first();
 
         return back()->with('flash', [
             'options' => $user->passkeys->count() 
@@ -83,7 +82,7 @@ class PasskeyController extends Controller
     /**
      * Verify user using passkey
      */
-    public function verify(VerifyPasskeyRequest $request, Passkey $passkey)
+    public function verify(VerifyPasskeyRequest $request)
     {
         if(isset(PasskeyTool::$updateModelCallback) && is_callable(PasskeyTool::$updateModelCallback)) {
             app()->call(PasskeyTool::$updateModelCallback);
@@ -91,7 +90,7 @@ class PasskeyController extends Controller
         else
         {
             $pk = json_decode($request->publicKeyCredentialSource, true);
-            Passkey::credential($pk['credential']['id'])
+            Config::get('passkey.models.passkey')::credential($pk['credential']['id'])
                 ->user($pk['userHandle'])
                 ->update([
                     'public_key' => $request->publicKeyCredentialSource,
@@ -108,7 +107,7 @@ class PasskeyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function login(VerifyPasskeyRequest $request, Passkey $passkey)
+    public function login(VerifyPasskeyRequest $request)
     {
         if(isset(PasskeyTool::$updateModelCallback) && is_callable(PasskeyTool::$updateModelCallback)) {
             app()->call(PasskeyTool::$updateModelCallback);
@@ -117,7 +116,7 @@ class PasskeyController extends Controller
         {
             $pk = json_decode($request->publicKeyCredentialSource, true);
 
-            Passkey::credential($pk['credential']['id'])
+            Config::get('passkey.models.passkey')::credential($pk['credential']['id'])
                 ->user($pk['userHandle'])
                 ->update([
                     'public_key' => $request->publicKeyCredentialSource,
@@ -132,8 +131,10 @@ class PasskeyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Passkey $passkey)
+    public function destroy($passkey)
     {
+        $passkey = Config::get('passkey.models.passkey')::where('id', $passkey)->firstOrFail();
+
         $passkey->delete();
     }
 }
