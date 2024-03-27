@@ -16,9 +16,9 @@ Route::middleware([
 ])->group(function () {
 
     Route::prefix(Config::get('passkey.routes.prefix', 'passkeys'))->group(function () {
-        Route::middleware('password.confirm:,60')->post('/registration-options', [PasskeyController::class, 'getRegistrationOptions'])->name('passkeys.registration-options');
+        Route::middleware('password.confirm:,'.Config::get('passkey.password_confirmation_ttl'))->post('/registration-options', [PasskeyController::class, 'getRegistrationOptions'])->name('passkeys.registration-options');
         Route::post('/verify', [PasskeyController::class, 'verify'])->name('passkeys.verify');
-        Route::middleware('password.confirm:,60')->delete('/{passkey}', [PasskeyController::class, 'destroy'])->name('passkeys.destroy');
+        Route::middleware('password.confirm:,'.Config::get('passkey.password_confirmation_ttl'))->delete('/{passkey}', [PasskeyController::class, 'destroy'])->name('passkeys.destroy');
         Route::post('/', [PasskeyController::class, 'store'])->name('passkeys.store');
     });
 

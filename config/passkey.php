@@ -38,11 +38,6 @@ return [
     'user_model' => 'App\Models\User',
 
     /**
-     * Enable debug logs
-     */
-    'debug' => env('PASSKEY_DEBUG', false),
-
-    /**
      * -----------------------------------------------------
      * HOME
      * -----------------------------------------------------
@@ -78,5 +73,10 @@ return [
          * What should be the prefix for the package defined routes
          */
         'prefix' => '/passkeys',
-    ]
+    ],
+
+    /**
+     * Password confirmation TTL in seconds
+     */
+    'password_confirmation_ttl' => 60,
 ];
