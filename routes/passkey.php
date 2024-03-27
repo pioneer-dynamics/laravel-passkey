@@ -4,12 +4,15 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use PioneerDynamics\LaravelPasskey\Http\Controllers\PasskeyController;
 
-Route::prefix(Config::get('passkey.routes.prefix', 'passkeys'))->group(function () {
-    Route::post('/authentication-options', [PasskeyController::class, 'getAuthenticationOptions'])->name('passkeys.authentication-options');
-    Route::post('/login', [PasskeyController::class, 'login'])->name('passkeys.login');
+Route::middleware('web')->group(function() {
+    Route::prefix(Config::get('passkey.routes.prefix', 'passkeys'))->group(function () {
+        Route::post('/authentication-options', [PasskeyController::class, 'getAuthenticationOptions'])->name('passkeys.authentication-options');
+        Route::post('/login', [PasskeyController::class, 'login'])->name('passkeys.login');
+    });
 });
 
 Route::middleware([
+    'web',
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',

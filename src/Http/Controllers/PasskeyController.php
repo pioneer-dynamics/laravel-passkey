@@ -60,7 +60,7 @@ class PasskeyController extends Controller
      */
     public function getAuthenticationOptions(PasskeyAuthenticator $passkeyAuthenticator, Request $request)
     {
-        $usernameField = Config::get('passkey.database.field');
+        $usernameField = Config::get('passkey.database.username');
 
         $request->validate([
             $usernameField => ['required', __('exists::table,:field', [
