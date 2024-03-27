@@ -15,7 +15,6 @@ Route::middleware([
     'web',
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified',
 ])->group(function () {
 
     Route::prefix(Config::get('passkey.routes.prefix', 'passkeys'))->group(function () {
