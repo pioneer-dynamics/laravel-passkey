@@ -140,12 +140,11 @@ The core of the project uses [svgta/webauthn](https://github.com/svgta1/webauthn
 
 6. Replace the `<ConfirmsPassword/>` component with `<ConfirmsPasswordOrPasskey/>` component whereever `<ConfirmsPassword/>` is used.
 
-7. If using Jetstream-InertiaJS you need to additionally install the below npm packages:
-
-    ```
-    npm i luxon
-    npm i @simplewebauthn/browser
-    ```
+7. If using Jetstream-InertiaJS the below packages are needed are installed automatically if the command was called with the `--jetstream-inertia` option.
+    
+    1. npm i luxon
+    1. npm i @simplewebauthn/browser
+    
 
 ## Issues
 
