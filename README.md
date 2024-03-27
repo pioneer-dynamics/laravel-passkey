@@ -91,6 +91,46 @@ Easy Passkey integration for Laravel
     }
     ```
 
+5. If you are using Laravel Jetstream with InertiaJS, you can can add the below to the `FortifyServiceProvider`'s `boot()` command in order to override the default Login Vue and use the one provided by this package. 
+
+    ```php
+    <?php
+
+    namespace App\Providers;
+
+    // ...
+
+    use Inertia\Inertia;
+    use Illuminate\Support\Facades\Route;
+    use Illuminate\Support\ServiceProvider;
+
+    // ...
+
+    class FortifyServiceProvider extends ServiceProvider
+    {
+        // ...
+
+        /**
+        * Bootstrap any application services.
+        */
+        public function boot(): void
+        {
+            // ...
+
+            Fortify::loginView(function () {
+                return Inertia::render('Auth/LoginWithPasskey', [
+                    'canResetPassword' => Route::has('password.request'),
+                    'status' => session('status'),
+                ]);
+            });
+
+            // ...
+        }
+    }
+    ```
+
+6. Replace the `<ConfirmsPassword/>` component with `<ConfirmsPasswordOrPasskey/>` component whereever `<ConfirmsPassword/>` is used.
+
 ## Issues
 
 Feel free to raise any [Issue](https://github.com/pioneer-dynamics/laravel-passkey/issues) here.
