@@ -1,8 +1,8 @@
 # Security Policy
 
-## Supported Versions
-
 In general, security patches are supported for any version upto one year after the release of the next major version.
+
+## Supported Versions
 
 | Version | Supported          |
 | ------- | ------------------ |
