@@ -4,7 +4,7 @@
     "type": "library",
     "require": {
         "svgta/webauthn": "^1.0",
-        "laravel/framework": "^10.10"
+        "laravel/framework": "^11.0"
     },
     "license": "MIT",
     "autoload": {
