@@ -12,6 +12,10 @@
     const authorityConfirmed = ref(null);
 
     const props = defineProps({
+        remember: {
+            type: Boolean,
+            default: false
+        },
         title: {
             type: String,
             default: 'Confirm Passkey',
@@ -34,6 +38,7 @@
     const passkeyForm = useForm({
         passkey: '',
         __USERNAME__: props.__USERNAME__,
+        remember: false,
     });
 
     const operationCancelled = (failed=false) => {
@@ -45,18 +50,21 @@
         startAuthentication(JSON.parse(JSON.stringify(usePage().props.jetstream.flash.options)))
             .then((res) =>{
                 passkeyForm.passkey = res;
-                passkeyForm.post(route(props.mode == 'login' ? 'passkeys.login' : 'passkeys.verify'), {
-                    preserveScroll: true,
-                    preserveState: true,
-                    onSuccess: () => {
-                        if(props.mode == 'login' || usePage().props.jetstream.flash.verified) {
-                            authorityConfirmed.value = true;
-                        }
-                    },
-                    onError: (e) => {
-                        console.error(e);
-                        authorityConfirmed.value = false;
-                    }
+                passkeyForm.transform(data => ({
+                        ...data,
+                        remember: props.remember ? 'on' : '',
+                    })).post(route(props.mode == 'login' ? 'passkeys.login' : 'passkeys.verify'), {
+                            preserveScroll: true,
+                            preserveState: true,
+                            onSuccess: () => {
+                                if(props.mode == 'login' || usePage().props.jetstream.flash.verified) {
+                                    authorityConfirmed.value = true;
+                                }
+                            },
+                            onError: (e) => {
+                                console.error(e);
+                                authorityConfirmed.value = false;
+                            }
                 });
             })
             .catch((e) => {

@@ -117,6 +117,6 @@ const cancelPasskeyLogin = (failed) => {
                 </PrimaryButton>
             </div>
         </form>
-        <ConfirmsPasskey :__USERNAME__="form.__USERNAME__" ref="passkeyConfirmation" @cancelled="cancelPasskeyLogin" mode="login"/>
+        <ConfirmsPasskey :__USERNAME__="form.__USERNAME__" ref="passkeyConfirmation" @cancelled="cancelPasskeyLogin" mode="login" :remember="form.remember"/>
     </AuthenticationCard>
 </template>
