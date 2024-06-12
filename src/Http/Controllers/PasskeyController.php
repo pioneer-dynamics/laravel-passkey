@@ -123,7 +123,7 @@ class PasskeyController extends Controller
                 ]);
         }
 
-        Auth::loginUsingId($pk['userHandle'], $request->remember == 'on');
+        Auth::loginUsingId($pk['userHandle'], $request->remember);
 
         return redirect()->intended(Config::get('passkey.home'));
     }
