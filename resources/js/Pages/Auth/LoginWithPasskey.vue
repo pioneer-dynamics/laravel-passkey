@@ -19,6 +19,7 @@ const isPasswordLogin = ref(false);
 const isProcessing = ref(false);
 
 const passkeyConfirmation = ref(null);
+const passwordInput = ref(null);
 
 const form = useForm({
     __USERNAME__: '',
@@ -50,7 +51,10 @@ const passwordLogin = () => {
 
 const cancelPasskeyLogin = (failed) => {
     if(!failed)
-        isPasswordLogin.value = true
+    {
+        isPasswordLogin.value = true;
+        setTimeout(() => passwordInput.value?.focus(), 100);
+    }
     isProcessing.value = false
 }
 </script>
@@ -89,6 +93,7 @@ const cancelPasskeyLogin = (failed) => {
                     id="password"
                     v-model="form.password"
                     type="password"
+                    ref="passwordInput"
                     class="mt-1 block w-full"
                     required
                     autocomplete="current-password"
