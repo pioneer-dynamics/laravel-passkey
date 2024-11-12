@@ -38,7 +38,7 @@ class VerifyPasskeyRequest extends FormRequest
             {
                 $usernameField = config('passkey.database.username');
 
-                $this->publicKeyCredentialSource = PasskeyAuthenticator::setUser(optional($this->user())->$usernameField)->validate($this->passkey);
+                $this->publicKeyCredentialSource = PasskeyAuthenticator::setUser($this->user())->validate($this->passkey);
                 
                 if(!$this->publicKeyCredentialSource)
                     $validator->errors()->add('passkey', __('Invalid passkey.'));
