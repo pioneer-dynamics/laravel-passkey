@@ -59,7 +59,19 @@ class PasskeyController extends Controller
      */
     public function getAuthenticationOptions(PasskeyAuthenticator $passkeyAuthenticator, Request $request)
     {
-        return back()->with('flash', ['options' => $passkeyAuthenticator->setUser()->generateOptions()]);
+        $usernameField = Config::get('passkey.database.username');
+
+        $username = optional($request->user())->$usernameField;
+
+        $user = $username 
+                ? Config::get('passkey.models.user')::where($usernameField, $username)->first()
+                : null;
+
+        return back()->with('flash', [
+            'options' => $passkeyAuthenticator
+                            ->setUser($user)
+                            ->generateOptions()
+        ]);
     }
 
     /**
