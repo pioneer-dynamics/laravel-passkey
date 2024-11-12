@@ -26,13 +26,8 @@ class VerifyPasskeyRequest extends FormRequest
      */
     public function rules(): array
     {
-        $usernameField = Config::get('passkey.database.username');
-        
         return [
-            $usernameField => __('required|exists::table,:field', [
-                'table' => Config::get('passkey.database.table'),
-                'field' => $usernameField
-            ]),
+
         ];
     }
 

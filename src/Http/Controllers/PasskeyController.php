@@ -59,24 +59,7 @@ class PasskeyController extends Controller
      */
     public function getAuthenticationOptions(PasskeyAuthenticator $passkeyAuthenticator, Request $request)
     {
-        $usernameField = Config::get('passkey.database.username');
-
-        $request->validate([
-            $usernameField => ['required', __('exists::table,:field', [
-                'table' => Config::get('passkey.database.table'),
-                'field' => $usernameField,
-            ])],
-        ]);
-
-        $username = optional($request->user())->$usernameField ?? $request->$usernameField;
-
-        $user = Config::get('passkey.models.user')::where($usernameField, $username)->first();
-
-        return back()->with('flash', [
-            'options' => $user->passkeys->count() 
-                            ? $passkeyAuthenticator->setUser($user)->generateOptions()
-                            : false,
-        ]);
+        return back()->with('flash', ['options' => $passkeyAuthenticator->setUser()->generateOptions()]);
     }
 
     /**
@@ -91,7 +74,6 @@ class PasskeyController extends Controller
         {
             $pk = json_decode($request->publicKeyCredentialSource, true);
             Config::get('passkey.models.passkey')::credential($pk['credential']['id'])
-                ->user($pk['userHandle'])
                 ->update([
                     'public_key' => $request->publicKeyCredentialSource,
                 ]);
@@ -115,15 +97,17 @@ class PasskeyController extends Controller
         else
         {
             $pk = json_decode($request->publicKeyCredentialSource, true);
+            
 
             Config::get('passkey.models.passkey')::credential($pk['credential']['id'])
-                ->user($pk['userHandle'])
                 ->update([
                     'public_key' => $request->publicKeyCredentialSource,
                 ]);
         }
 
-        Auth::loginUsingId($pk['userHandle'], $request->remember == 'on');
+        $passkeyable = Config::get('passkey.models.passkey')::credential($pk['credential']['id'])->firstOrFail()->passkeyable;
+
+        Auth::loginUsingId($passkeyable->id, $request->remember == 'on');
 
         return redirect()->intended(Config::get('passkey.home'));
     }
