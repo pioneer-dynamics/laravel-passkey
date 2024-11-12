@@ -59,6 +59,10 @@ The core of the project uses [svgta/webauthn](https://github.com/svgta1/webauthn
         // ...
         use HasPasskeys;
 
+        protected $with = [
+            'passkeys',
+        ];
+
         // ...
 
         /**
