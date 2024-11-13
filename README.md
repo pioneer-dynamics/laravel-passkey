@@ -4,11 +4,15 @@ Easy Passkey integration for Laravel
 
 > Click the thumbnail below to see a video of the package in action.:
 
-[![](https://play.vidyard.com/5xRa3CyPEaYkRTiBCiNzuE.jpg)](https://share.vidyard.com/watch/5xRa3CyPEaYkRTiBCiNzuE?)
+[![](https://play.vidyard.com/ZX4gLpzArkiCCTkrxeXPLH.jpg)](https://share.vidyard.com/watch/ZX4gLpzArkiCCTkrxeXPLH?)
 
 ## Thank You
 
 The core of the project uses [svgta/webauthn](https://github.com/svgta1/webauthn-php) library.
+
+## We are looking for contributors
+
+We are looking for contributors to help improve the library and add compatibility for Livewire.
 
 ## ALERT
 
@@ -59,11 +63,15 @@ The core of the project uses [svgta/webauthn](https://github.com/svgta1/webauthn
         // ...
         use HasPasskeys;
 
-        protected $with = [
-            'passkeys',
-        ];
-
         // ...
+
+        /**
+         * If you wish to not use `HasPassKeys` trait, you must eager load `passkeys`
+         * attribute like this:
+         * 
+         */
+
+        // protected $with = ['passkeys'];
 
         /**
          * In addition to some helper methods, the below methods are defined
@@ -142,9 +150,11 @@ The core of the project uses [svgta/webauthn](https://github.com/svgta1/webauthn
     }
     ```
 
-6. Replace the `<ConfirmsPassword/>` component with `<ConfirmsPasswordOrPasskey/>` component whereever `<ConfirmsPassword/>` is used.
+6. Replace the `<ConfirmsPassword/>` component with `<ConfirmsPasswordOrPasskey/>` component whereever `<ConfirmsPassword/>` is used. The ``<ConfirmsPasswordOrPasskey/>` optionally accepts a `:seconds` property which defines how long a validation should be valid for. Should you chose to use it, there should also be a corresponding `password.confirm` middleware for the route.
 
-7. If using Jetstream-InertiaJS the below packages are needed are installed automatically if the command was called with the `--jetstream-inertia` option.
+7. Add `<PasskeyForm/>` from `resources/js/Pages/Profile/Partials/PassKeyForm.vue` to `resources/js/Pages/Profile/Show.vue`. This is where users will manage their passkeys.
+
+8. If using Jetstream-InertiaJS the below packages are needed are installed automatically if the command was called with the `--jetstream-inertia` option.
     
     1. npm i luxon
     1. npm i @simplewebauthn/browser
@@ -153,10 +163,6 @@ The core of the project uses [svgta/webauthn](https://github.com/svgta1/webauthn
 ## Issues
 
 Feel free to raise any [Issue](https://github.com/pioneer-dynamics/laravel-passkey/issues) here.
-
-## Contributing
-
-Feel free to raise pull requests.
 
 ## Licence
 
