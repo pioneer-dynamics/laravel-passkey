@@ -15,11 +15,17 @@ trait HasPasskeys
         static::deleting(function ($user) {
             $user->passkeys()->delete();
         });
+
+        static::retrieved(function ($user) {
+            $user->load('passkeys');
+        });
     }
 
     public function getUsername()
     {
-        return $this->email;
+        $username_field = config('passkey.database.username');
+
+        return $this->$username_field;
     }
 
     public function getUserId()
@@ -34,6 +40,19 @@ trait HasPasskeys
 
     public function getUserIcon()
     {
-        return null;
+        return blank($this->profile_photo_url)
+            ? null
+            : $this->generateUserImage();
+    }
+
+    private function generateUserImage()
+    {
+        $image = file_get_contents($this->profile_photo_url);
+
+        $file_info = finfo_open(FILEINFO_MIME_TYPE);
+
+        $data = base64_encode($image);
+
+        return 'data: '.finfo_buffer($file_info, $image). ';base64,'.$data;
     }
 }
