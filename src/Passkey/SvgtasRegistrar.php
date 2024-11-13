@@ -38,9 +38,9 @@ class SvgtasRegistrar extends SvgtasPasskey implements PasskeyRegistrar
         if($passkeyUser)
         {
             $this->webauthn->user->set(
-                $passkeyUser->getUserName(),
-                $passkeyUser->getUserId(),
-                $passkeyUser->getDisplayName()
+                name: $passkeyUser->getDisplayName(),
+                id: $passkeyUser->getUserId(),
+                icon: $passkeyUser->getUserIcon()
             );
 
             $passkeyUser->passkeys->each(fn($passkey) => $this->webauthn->excludeCredentials->add($passkey->credential_id));
