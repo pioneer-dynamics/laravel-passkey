@@ -40,7 +40,7 @@ trait HasPasskeys
 
     public function getUserIcon()
     {
-        return blank($image_url = $this->generateUserImageFrom())
+        return blank($image_url = $this->{$this->generateUserImageFrom()})
             ? null
             : $this->generateUserImage($image_url);
     }
