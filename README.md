@@ -98,13 +98,10 @@ We are looking for contributors to help improve the library and add compatibilit
         //      return $this->name;
         // }
         // 
-        // public function getUserIcon()
+        // protected function generateUserImageFrom()
         // {
-        //      // The display picture of the user.
-        //      // This MUST be a data URI.
-        //      // E.g.
-        //      // return 'data:image/svg+xml;utf8,...'
-        //     return null;
+        //      // return the attribute that holds the path to the user image (preferably public url)
+        //     return 'profile_photo_url';
         // }
 
         // ...

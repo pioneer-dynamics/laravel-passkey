@@ -40,14 +40,19 @@ trait HasPasskeys
 
     public function getUserIcon()
     {
-        return blank($this->profile_photo_url)
+        return blank($image_url = $this->generateUserImageFrom())
             ? null
-            : $this->generateUserImage();
+            : $this->generateUserImage($image_url);
     }
 
-    private function generateUserImage()
+    protected function generateUserImageFrom()
     {
-        $image = file_get_contents($this->profile_photo_url);
+        return 'profile_photo_url';
+    }
+
+    private function generateUserImage($image_url)
+    {
+        $image = file_get_contents($image_url);
 
         $file_info = finfo_open(FILEINFO_MIME_TYPE);
 
