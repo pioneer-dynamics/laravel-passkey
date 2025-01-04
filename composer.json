@@ -3,8 +3,7 @@
     "description": "Easy Passkey integration for Laravel",
     "type": "library",
     "require": {
-        "svgta/webauthn": "^1.0",
-        "laravel/framework": "^11.0"
+        "svgta/webauthn": "^1.0"
     },
     "license": "MIT",
     "autoload": {
