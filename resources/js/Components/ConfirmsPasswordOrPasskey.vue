@@ -93,7 +93,7 @@ const closeModal = () => {
 
         <ConfirmsPasskey :__USERNAME__="$page.props.auth.user.__USERNAME__" ref="passkeyConfirmation" @confirmed="emit('confirmed')" @cancelled="askForPassword"/>
 
-        <DialogModal :show="confirmingPassword" @close="closeModal" ref="password">
+        <DialogModal :show="confirmingPassword" @close="closeModal" ref="password" class="justify-left text-left">
             <template #title>
                 {{ title }}
             </template>
