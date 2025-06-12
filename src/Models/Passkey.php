@@ -14,7 +14,7 @@ class Passkey extends Model
         'name',
     ];
 
-    protected function passkeyable()
+    public function passkeyable()
     {
         return $this->morphTo();
     }
