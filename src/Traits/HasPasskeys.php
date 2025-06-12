@@ -15,10 +15,6 @@ trait HasPasskeys
         static::deleting(function ($user) {
             $user->passkeys()->delete();
         });
-
-        static::retrieved(function ($user) {
-            $user->load('passkeys');
-        });
     }
 
     public function getUsername()

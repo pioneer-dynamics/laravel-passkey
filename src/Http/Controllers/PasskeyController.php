@@ -23,6 +23,8 @@ class PasskeyController extends Controller
      */
     public function index()
     {
+        Auth::user()->load('passkeys');
+
         return app('passkey.views.management');
     }
 
